@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css?family=Bellota&display=swap");
+
+#app {
+  // min-height: 100vh;
+
+  font-family: "Bellota", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: black;
+  font-size: 2em;
+
+  background-color: var(--color1);
+  color: var(--color2);
+
+  transition: background-color 0.7s;
+
+  a {
+    color: var(--color3);
+  }
+}

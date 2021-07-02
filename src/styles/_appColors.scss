@@ -1,0 +1,37 @@
+#app {
+  &[data-route="home"] {
+    --color1: cornflowerblue;
+    --color1-2: #0b55dc;
+
+    --color2: white;
+
+    --color3: darkslategray;
+  }
+
+  &[data-route="about"] {
+    --color1: orangered;
+    --color1-2: #aa2e00;
+
+    --color2: yellow;
+
+    --color3: white;
+  }
+
+  &[data-route="bonjour"] {
+    --color1: black;
+    --color1-2: #474747;
+
+    --color2: white;
+
+    --color3: red;
+  }
+
+  &[data-route="go"] {
+    --color1: burlywood;
+    --color1-2: #c88b3c;
+
+    --color2: blueviolet;
+
+    --color3: black;
+  }
+}
