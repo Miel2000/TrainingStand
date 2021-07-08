@@ -60,16 +60,45 @@ export default {
        if(choiceSelected.id == 'stayOnCyberpunk') {
           return this.$store.commit("setActualChoices", []);
         }
+        if(choiceSelected.id == 'paradi'){
+          this.$store.commit('setActualAudio', {})
+          return this.execptionsWhenParadi(choiceSelected.id,this.computedWeapon)
+        }
+        if(choiceSelected.id == 'cyberpunk_couteau' ||  choiceSelected.id == 'cyberpunk_banane'  || choiceSelected.id == 'cyberpunk_fusil' ){
+          this.$store.commit('setActualAudio', {})
+          this.$store.commit("setActualChoices", {});
+          this.$store.commit("setActualVideo",   this.computedStoryMap.videos[choiceSelected.route]);
+
+
+        }
+       
+     
         this.exceptionsManager(choiceSelected);
         this.$store.commit("setActualVideo",   this.computedStoryMap.videos[choiceSelected.route]);
         this.$store.commit("setActualChoices", []);
     
       },
 
-      exceptionsManager(choiceSelected) {
+      execptionsWhenParadi(choiceSelectedId,weapon){
+        if( choiceSelectedId== "paradi" && weapon == "banane"){
+                this.$store.commit('setActualAudio',      {});
+                return this.$store.commit('setActualVideo', this.computedStoryMap.videos['paradi_banane'])
 
+              }
+              if( choiceSelectedId== "paradi" && weapon == "couteau"){
+                return   this.$store.commit('setActualVideo', this.computedStoryMap.videos['paradi_couteau'])
+
+              }
+              if( choiceSelectedId == "paradi" && weapon == "fusil"){
+                this.$store.commit('setActualAudio',      {});
+                return   this.$store.commit('setActualVideo', this.computedStoryMap.videos['paradi_fusil'])
+
+              }
+        },
      
-     
+
+      exceptionsManager(choiceSelected) {
+ 
         if(choiceSelected.route == 'shooting_remake'){
         
           this.$store.commit('setActualNinjaLife',  200);
@@ -78,7 +107,7 @@ export default {
           this.$store.commit('setActualBackground', this.computedStoryMap.videos[choiceSelected.route].backgrounds );
 
         }
-
+        // choix de l'arme
         if(choiceSelected.id === "banane") {
             this.$store.commit("setActualWeapon", "banane");
         }
@@ -90,10 +119,8 @@ export default {
         }
 
 
-        if(choiceSelected.id === "cyberpunk") {
-          this.$store.commit('setActualAudio',      {});
-
-        }
+       
+      
 
     },
   },

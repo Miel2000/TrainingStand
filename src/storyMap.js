@@ -114,8 +114,7 @@ export default {
                 },
             ]
 
-    },
-
+        },
 
         hokage: {
             id: 'hokage',
@@ -159,8 +158,6 @@ export default {
                 
         },
 
-       
-
         banane: {
             id:"banane",
             self: {
@@ -182,7 +179,7 @@ export default {
 
             timedImposedRoots: [
                 {
-                    at: 40,
+                    at: 40.9,
                     id:"shooting",
                     route: "shooting",
                     type:"imposed",
@@ -211,7 +208,7 @@ export default {
 
             timedImposedRoots: [
                 {
-                    at: 40,
+                    at: 42.7,
                     id:"shooting",
                     route: "shooting",
                     type:"imposed",
@@ -248,7 +245,6 @@ export default {
                 }
             ]
         },
-
 
         shooting:  {
             id:"shooting",
@@ -292,23 +288,164 @@ export default {
 
             self: {
 
-                url: "valorant_banane.mp4",
+                url: "valorant/valorant_banane.mp4",
                 controls: true,
                 options: {
                 
                 }
              },
-            backgrounds: [],
+            timedAudios: [
+                {
+                    id:"valorant_banane_audio",
+                    at: 0,
+                    to:26,
+                    isLooping:true,
+                    url: 'valorant/valorant_sound.mp3',
+                    type: 'sound'
+                }
+            ],
             timedChoices: [
 
                 {
-                    at: 16,
-                    text:"Aller dans la jungle",
-                    id:"fantome_noyade",
-                    route: "fantome_noyade",
+                    at: 18,
+                    text:"Partir avec la banane",
+                    id:"cyberpunk_banane",
+                    route: "cyberpunk_banane",
                     type:"choice",
                 },
       
+                {
+                    at: 14.5,
+                    id: "couteau",
+                    text: "Couteau",
+                    route: "shooting_remake",
+                    img: "couteau.png",
+                    type: "choice"
+                },
+                {
+                    at: 14,
+                    id: "fusil",
+                    text: "Fusil",
+                    route: "shooting_remake",
+                    img: "fusil.png",
+                    type: "choice"
+                },
+            ],
+            timedImposedRoots: [
+                {
+                    at: 26,
+                    id:"valorant_b_to_cyberpunk_banane",
+                    route: "cyberpunk_banane",
+                    type:"imposed",
+
+                }
+            ]
+          
+
+        },
+
+        valorant_couteau: {
+
+            id:"valorant_couteau",
+            self: {
+
+                url: "valorant/valorant_couteau.mp4",
+                controls: true,
+             },
+            timedAudios: [
+                {
+                    id:"valorant_banane_audio",
+                    at: 0,
+                    to:32.5,
+                    isLooping:true,
+                    url: 'valorant/valorant_sound.mp3',
+                    type: 'sound'
+                }
+            ],
+            timedChoices: [
+
+                {
+                    at: 4,
+                    text:"Partir avec le couteau",
+                    id:"cyberpunk_couteau",
+                    route: "cyberpunk_couteau",
+                    type:"choice",
+                },
+                {
+                    at: 7.5,
+                    id: "banane",
+                    text: "Banane",
+                    route: "shooting_remake",
+                    img: "banane.png",
+                    type: "choice"
+                },
+                
+                {
+                    at: 7.5,
+                    id: "fusil",
+                    text: "Fusil",
+                    route: "shooting_remake",
+                    img: "fusil.png",
+                    type: "choice"
+                },
+            ],
+            timedImposedRoots: [
+                {
+                    at: 33,
+                    id:"valorant_c_to_cyberpunk_couteau",
+                    route: "cyberpunk_couteau",
+                    type:"imposed",
+
+                }
+            ]
+      
+        },
+
+        valorant_fusil: {
+            id:"valorant_fusil",
+
+            self: {
+
+                url: "valorant/valorant_fusil.mp4",
+                controls: true,
+             },
+             timedAudios: [
+                {
+                    id:"valorant_banane_audio",
+                    at: 0,
+                    to:2,
+                    isLooping:true,
+                    url: 'valorant/valorant_sound.mp3',
+                    type: 'sound'
+                },
+                {
+                    id:"valorant_banane_audio",
+                    at: 9.5,
+                    to:32.5,
+                    isLooping:true,
+                    url: 'valorant/valorant_break_suite.mp3',
+                    type: 'sound'
+                }
+            ],
+            timedChoices: [
+
+                {
+                    at: 23.5,
+                    text:"Partir avec le fuzil",
+                    id:"cyberpunk_fusil",
+                    route: "cyberpunk_fusil",
+                    type:"choice",
+                },
+                
+                {
+                    at: 15,
+                    id: "banane",
+                    text: "Banane",
+                    route: "shooting_remake",
+                    img: "banane.png",
+                    type: "choice"
+                },
+                
                 {
                     at: 15,
                     id: "couteau",
@@ -317,99 +454,20 @@ export default {
                     img: "couteau.png",
                     type: "choice"
                 },
-                {
-                    at: 7.5,
-                    id: "fusil",
-                    text: "Fusil",
-                    route: "shooting_remake",
-                    img: "fusil.png",
-                    type: "choice"
-                },
             ],
-          
-
-            },
-
-        
-        valorant_couteau: {
-
-            id:"valorant_couteau",
-            self: {
-
-                url: "valorant_couteau.mp4",
-                controls: true,
-             },
-            backgrounds: [],
-            timedChoices: [
-
+            timedImposedRoots: [
                 {
-                    at: 4,
-                    text:"Aller dans la jungle",
-                    id:"cyberpunk",
-                    route: "cyberpunk",
-                    type:"choice",
-                },
-                {
-                    at: 7.5,
-                    id: "banane",
-                    text: "Banane",
-                    route: "shooting_remake",
-                    img: "banane.png",
-                    type: "choice"
-                },
-                
-                {
-                    at: 7.5,
-                    id: "fusil",
-                    text: "Fusil",
-                    route: "shooting_remake",
-                    img: "fusil.png",
-                    type: "choice"
-                },
-            ],
+                    at: 34,
+                    id:"valorant_f_to_cyberpunk_fusil",
+                    route: "cyberpunk_fusil",
+                    type:"imposed",
+
+                }
+            ]
     
-             
-            },
 
-        valorant_fusil: {
-            id:"valorant_fusil",
+        },
 
-            self: {
-
-                url: "valorant_fusil.mp4",
-                controls: true,
-             },
-            backgrounds: [],
-            timedChoices: [
-
-                {
-                    at: 23,
-                    text:"Partir avec le fuzil",
-                    id:"cyberpunk",
-                    route: "cyberpunk",
-                    type:"choice",
-                },
-                
-                {
-                    at: 23,
-                    id: "banane",
-                    text: "Banane",
-                    route: "shooting_remake",
-                    img: "banane.png",
-                    type: "choice"
-                },
-                
-                {
-                    at: 23,
-                    id: "couteau",
-                    text: "Couteau",
-                    route: "shooting_remake",
-                    img: "couteau.png",
-                    type: "choice"
-                },
-            ],
-
-            },
         shooting_remake: {
             id:"shooting_remake",
             isBackground: true,
@@ -453,18 +511,18 @@ export default {
 
         },
 
-
-
-        cyberpunk: {
-            id:"cyberpunk",
+  
+        cyberpunk_fusil: {
+            id:"cyberpunk_fusil",
             self:{
-                url: "cyberpunk.mp4",
+                url: "cyberpunk/cyberpunk_fusil.mp4",
                 controls: true,
                 
             },
             timedChoices: [
                 {
                     at: 36,
+                    to:42,
                     id: "neopdf",
                     text: "Parler à Néo",
                     route: "neopdf",
@@ -473,13 +531,89 @@ export default {
                 },
                 {
                     at: 39,
+                    to:42,
                     id: "stayOnCyberpunk",
                     text: "Répondre au Nano-téléphone",
                     img: "telephone.png",
                     type: "choice"
                 },
                 {
-                    at: 60,
+                    at: 68,
+                    to:76,
+                    id: "paradi",
+                    text: "Esquiver l'explosiun",
+                    route: "paradi",
+                    img: "eskive.png",
+                    type: "choice"
+                },
+       
+            ],
+            timedAudios : [
+                {
+                    id:"cyberpunk_audio",
+                    at: 0,
+                    to:67.5,
+                    isLooping:true,
+                    url: 'background/cyberpunk_audio.mp3',
+                    type: 'sound'
+                }
+
+            ],
+            timedCtas: [
+                {
+                    id:"capsule_go_out",
+                    at: 3,
+                    to: 15,
+                    text:'Sortir de la capsule',
+                    type:"dodge",
+                 
+                    attributes : {
+                        dmg: 100,
+                        deathScene: "death_gatling"
+                    }
+                },
+                
+            ],
+            timedImposedRoots: [
+
+                {
+                    at: 74,
+                    id:"paradi",
+                    route: "paradi",
+                    type:"imposed",
+
+                }
+            ],
+         
+        },
+        cyberpunk_couteau: {
+            id:"cyberpunk_couteau",
+            self:{
+                url: "cyberpunk/cyberpunk_couteau.mp4",
+                controls: true,
+                
+            },
+            timedChoices: [
+                {
+                    at: 36,
+                    to:42,
+                    id: "neopdf",
+                    text: "Parler à Néo",
+                    route: "neopdf",
+                    img: "neopdf.png",
+                    type: "choice"
+                },
+                {
+                    at: 39,
+                    to:42,
+                    id: "stayOnCyberpunk",
+                    text: "Répondre au Nano-téléphone",
+                    img: "telephone.png",
+                    type: "choice"
+                },
+                {
+                    at: 68,
+                    to:76,
                     id: "paradi",
                     text: "Esquiver l'explosiun",
                     route: "paradi",
@@ -513,8 +647,92 @@ export default {
                 },
                 
             ],
+            timedImposedRoots: [
+
+                {
+                    at: 74,
+                    id:"paradi",
+                    route: "paradi",
+                    type:"imposed",
+
+                }
+            ],
          
         },
+        cyberpunk_banane: {
+            id:"cyberpunk_banane",
+            self:{
+                url: "cyberpunk/cyberpunk_banane.mp4",
+                controls: true,
+                
+            },
+            timedChoices: [
+                {
+                    at: 36,
+                    to:42,
+                    id: "neopdf",
+                    text: "Parler à Néo",
+                    route: "neopdf",
+                    img: "neopdf.png",
+                    type: "choice"
+                },
+                {
+                    at: 39,
+                    to:42,
+                    id: "stayOnCyberpunk",
+                    text: "Répondre au Nano-téléphone",
+                    img: "telephone.png",
+                    type: "choice"
+                },
+                {
+                    at: 68,
+                    to:76,
+                    id: "paradi",
+                    text: "Esquiver l'explosiun",
+                    route: "paradi",
+                    img: "eskive.png",
+                    type: "choice"
+                },
+       
+            ],
+            timedAudios : [
+                {
+                    id:"cyberpunk_audio",
+                    at: 0,
+                    isLooping:true,
+                    url: 'background/cyberpunk_audio.mp3',
+                    type: 'sound'
+                }
+
+            ],
+            timedCtas: [
+                {
+                    id:"capsule_go_out",
+                    at: 3,
+                    to: 15,
+                    text:'Sortir de la capsule',
+                    type:"dodge",
+                 
+                    attributes : {
+                        deathScene: "death_gatling"
+                    }
+                },
+                
+            ],
+            timedImposedRoots: [
+
+                {
+                    at: 74,
+                    id:"paradi",
+                    route: "paradi",
+                    type:"imposed",
+
+                }
+            ],
+         
+        },
+
+
 
         death_gatling : {
             id:"death_gatling",
@@ -526,14 +744,16 @@ export default {
                 {
                     at: 14.5,
                     id:"cyberpunk_imposed",
-                    route: "cyberpunk",
+                    route:"cyberpunk",
                     type:"imposed",
 
                 }
             ],
+
+        
             
         },
-
+      
         neopdf : {
             id:"neopdf",
             self: {
@@ -544,8 +764,8 @@ export default {
                     at: 35,
                     id: "bouddhiste",
                     text: "Devenir Bouddhiste",
-                    route: "neopdf",
-                    img: "neopdf.png",
+                    route: "bouddhiste",
+                    img: "bouddhiste.png",
                     type: "choice"
                 },
                 {
@@ -557,34 +777,83 @@ export default {
                     type: "choice"
                 },
             ],
-            timedImposedRoots: [],
+          
            
         },
-        paradi : {
-            id:"paradi",
+        
+        bouddhiste : {
+            id:"bouddhiste",
             self: {
-                url: "paradi.mp4"
+                url: "bouddhiste.mp4"
             },
             timedChoices: [
                 {
-                    at: 40,
+                    at: 35,
                     id: "diablo",
-                    text: "Peter des gens",
+                    text: "Peter au nez des gens",
+                    route: "bouddhiste",
+                    img: "bouddhiste.png",
+                    type: "choice"
+                },
+                {
+                    at: 37,
+                    id: "diablo",
+                    text: "Péter des gens",
                     route: "diablo",
                     img: "diablo.png",
                     type: "choice"
                 },
-                {
-                    at: 45,
-                    id: "generique",
-                    text: "Fin de l'aventure",
-                    route: "generique",
-                    img: "generique.png",
-                    type: "choice"
-                },
             ],
-            timedImposedRoots: [],
            
+           
+        },
+
+        
+
+
+
+
+        paradi_banane:{
+            id:'paradi_banane',
+            self: {
+                url: "paradi/paradi_banane.mp4"
+            },
+        },
+        paradi_couteau:{
+            id:'paradi_couteau',
+            self: {
+                url: "paradi/paradi_couteau.mp4"
+            },
+        },
+        paradi_fusil:{
+            id:'paradi_fusil',
+            self: {
+                url: "paradi/paradi_fusil.mp4"
+            },
+        },
+        
+
+    
+
+        generique_zelda : {
+            id:"generique_zelda",
+            generique_audio_url : "generique/zelda_fairy_foutain.mp3",
+            audio: {
+                intro: { 
+                    url: "intro_zelda.mp3"
+                 },
+                points: {
+                    papillon: {
+                        pp0 : '0_pp.mp3', 
+                        pp1 : '1_pp.mp3', 
+     
+                    },
+                    nuage: {
+                        pn0 : '0_pn.mp3',
+                        pn1 : '1_pn.mp3',
+                    }
+                }
+            }
         }
 
     }

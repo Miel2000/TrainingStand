@@ -5,8 +5,6 @@ import storyMap from "@/storyMap.js";
 
 Vue.use(Vuex)
 
-// pour y avoir acces partout ailleur, il faut faire $this.$store.state.mana
-
 export default new Vuex.Store({
   state: {
 
@@ -15,22 +13,22 @@ export default new Vuex.Store({
     currentTimeVideo: 0,
     currentTimeAudio: 0,
 
-    actualVideo: storyMap.videos['cyberpunk'],
+    actualVideo: storyMap.videos['weed'],
     actualChoices: [],
     actualBackground: {},
     actualAudio: {},
     actualEnemy: {},
     actualCallToActions: [],
-    actualWeapon:"couteau",
+    actualWeapon:"banane",
 
     // stats
     myLife: 40,
-    ninjaLife: 200,
+    ninjaLife: 200, 
 
 
     // scene cyberpunk
-    sortirCapsule:true,
-    repondreNano: false,
+    sortirCapsule:false,
+    repondreNano: false, 
 
 
     piegeFleche:false,
@@ -106,7 +104,7 @@ export default new Vuex.Store({
     },
 
     addActualChoices: (state, x) => {
-      state.actualChoices.push(x)
+      state.actualChoices.push(x);
     },
 
     setActualBackground: (state,x) => {

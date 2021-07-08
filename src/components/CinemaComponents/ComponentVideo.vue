@@ -23,7 +23,10 @@ export default {
   data(){
     return {
 
-      alreadySent: []
+      choicesAlreadySent: [],
+      ctasAlreadySent: [],
+      imposedRootAlreadySent: [],
+      audiosAlreadySent: [],
       
     }
   },
@@ -36,6 +39,9 @@ export default {
 
     computedVideo(){
       return this.$store.getters.getVideo;
+    },
+    computedWeapon(){
+      return this.$store.getters.getWeapon;
     },
 
     computedChoices() {
@@ -52,20 +58,18 @@ export default {
   },
 
   mounted() {
-    this.alreadySent = [];
+    
+    this.choicesAlreadySent     =  []
+    this.ctasAlreadySent        =  []
+    this.imposedRootAlreadySent =  []
+    this.audiosAlreadySent      =  []
   },
 
   methods: {
     onTimeUpdate(event) {
       this.$store.commit('setCurrentTimeVideo', event.target.currentTime);
-      // console.log(this.computedCurrentTimeVideo);
-      // Si y'a des ctas
-      // compare les timecodes des ctas
 
- 
-
-      // compare les timecodes issuent du computedVideo
-
+      //   /!\ COMPARING FROM TIMELINE VIDEO /!\ 
       // timedChoice
       if (this.computedVideo.timedChoices) {
         this.computedVideo.timedChoices.forEach((timedChoice) => {
@@ -89,110 +93,237 @@ export default {
 
       // timedCtas
      if(this.computedVideo.timedCtas ){
-
         this.computedVideo.timedCtas.forEach((timedCta) => {
           this.compareForTimedCtas(this.computedCurrentTimeVideo, timedCta)
 
-          switch (timedCta.id) {
-            case "capsule_go_out":
-                if( event.target.currentTime >= timedCta.to   &&  this.$store.state.sortirCapsule == false ) 
-                {
-                   // const die = new Audio("./assets/mp3/hits/piege_fleche.mp3");
-                  // die.play();
-
-                  console.log(this.$store.state.sortirCapsule, " : sortir capsule");
-                  console.log("death scene : ", timedCta.attributes.deathScene );
-                  this.$store.commit('setActualCallToActions',  {} )
-                  this.$store.commit('setActualAudio',  {} )
-                  this.alreadySent = [];
-                  this.$store.commit('setActualVideo',  this.computedStoryMap.videos['death_gatling'] )
-
-                  // event.target.currentTime = 0;
-                }
-              break;
-          
-            default:
-              break;
-          }
   
         })
+      }  
+    },
+
+ 
+    // METHODES 
+    muteAudioWhenWeaponAppair(oneTimedChoiceId){
+         if((oneTimedChoiceId === "fusil" || oneTimedChoiceId === "banane" || oneTimedChoiceId === "couteau") && this.computedVideo.id == "hokage" ) {
+            console.log("condition si scene ho")
+            this.$store.commit('setActualAudio', {});
       }
     },
+
     
+    compareForTrapCapsule(actualVideoTimeCode, currentVideo) {
+
+  
+      switch (currentVideo.id) {
+        
+        case "cyberpunk_fusil":
+                this.$store.commit('setActualCallToActions', {})
+                this.$store.commit('setActualAudio', {})
+                console.log('TRAPS ACTIVED' )
+                console.log('TRAPS currentVideo', currentVideo )
+                console.log('actualVideoTimeCode', actualVideoTimeCode )
+                this.$store.commit('setActualVideo',  this.computedStoryMap.videos['death_gatling'])
+
+          break;
+        case "cyberpunk_banane":
+                this.$store.commit('setActualCallToActions', {})
+                this.$store.commit('setActualAudio', {})
+                
+
+                console.log('TRAPS ACTIVED' )
+                console.log('TRAPS currentVideo', currentVideo )
+                console.log('actualVideoTimeCode', actualVideoTimeCode )
+                this.$store.commit('setActualVideo',  this.computedStoryMap.videos['death_gatling'])
+
+          break;
+        case "cyberpunk_couteau":
+                this.$store.commit('setActualCallToActions', {})
+                this.$store.commit('setActualAudio', {})
+                
+                console.log('TRAPS ACTIVED' )
+                console.log('TRAPS currentVideo', currentVideo )
+                console.log('actualVideoTimeCode', actualVideoTimeCode )
+                this.$store.commit('setActualVideo',  this.computedStoryMap.videos['death_gatling'])
+
+          break;
+      
+        default:
+          break;
+      }
+    
+    },
+
+    trappingCapsule(currentVideoTimeCode, oneTimedCtasId){
+            if(currentVideoTimeCode < 25   &&  ( this.$store.state.actualVideo.id  == "cyberpunk_fusil" || 
+                                              this.$store.state.actualVideo.id  == "cyberpunk_couteau" || 
+                                              this.$store.state.actualVideo.id  == "cyberpunk_banane"  )){
+              console.log(" ctas Actual Video  :", this.$store.state.actualVideo.id )
+              console.log(" ctas Actual Time Code :", currentVideoTimeCode)
+              console.log(" ctas RUN TIME oneTimedCtas :", oneTimedCtasId)
+            if(this.$store.state.sortirCapsule == false ){
+                     this.ctasAlreadySent = [];
+
+              return  this.compareForTrapCapsule( currentVideoTimeCode ,this.$store.state.actualVideo  )
+            }
+
+         
+          }
+     
+    },
+
+
     compareForTimedChoices(actualVideoTimeCode ,oneTimedChoice) {
 
       if (oneTimedChoice) {
 
-        if(actualVideoTimeCode >=  oneTimedChoice.at && this.alreadySent.indexOf(oneTimedChoice.id) === -1)
+        if(actualVideoTimeCode >=  oneTimedChoice.at && this.choicesAlreadySent.indexOf(oneTimedChoice.id) === -1)
         {
-          this.alreadySent.push(oneTimedChoice.id);
+          this.choicesAlreadySent.push(oneTimedChoice.id);
           this.$store.commit('addActualChoices', oneTimedChoice);
-          if(oneTimedChoice.id === "fusil" || oneTimedChoice.id === "banane" || oneTimedChoice.id === "couteau" ) {
-            this.$store.commit('setActualAudio', {});
-          }
+          
+          this.muteAudioWhenWeaponAppair(oneTimedChoice.id);
+     
+        } 
+
+        
+
+        if(actualVideoTimeCode >=  oneTimedChoice.to &&  this.choicesAlreadySent.indexOf(oneTimedChoice.id) !== -1 ){
+            
+          console.log("stop Choice .to :", oneTimedChoice.id);
+          this.$store.commit('setActualChoices', []);
+          
+          this.choicesAlreadySent = [];
+       
+
         }
+
       }
     },
-    
+
     
     compareForTimedCtas(actualVideoTimeCode ,oneTimedCtas) {
 
       if (oneTimedCtas) {
 
-        if(actualVideoTimeCode >=  oneTimedCtas.at && this.alreadySent.indexOf(oneTimedCtas.id) === -1)
+        if(actualVideoTimeCode >=  oneTimedCtas.at && this.ctasAlreadySent.indexOf(oneTimedCtas.id) === -1)
         {
-          this.alreadySent.push(oneTimedCtas.id);
+          this.ctasAlreadySent.push(oneTimedCtas.id);
           this.$store.commit('setActualCallToActions', oneTimedCtas);
 
         }
-        if(actualVideoTimeCode >=  oneTimedCtas.to &&  this.alreadySent.indexOf(oneTimedCtas.id) !== -1 ){
-          console.log("stop Ctas .to :", oneTimedCtas.id);
-          this.$store.commit('setActualCallToActions', {});
-          // this.alreadySent.splice(oneTimedCtas,1)
 
+        if(actualVideoTimeCode >=  oneTimedCtas.to &&  this.ctasAlreadySent.indexOf(oneTimedCtas.id) !== -1 ){
+          
+          // trash condition pour éviter chevauchement du timeCode valorant_arme et cyberpunk_arme (evite la redirection auto deathScene gatling )
+            this.trappingCapsule(actualVideoTimeCode, oneTimedCtas.id)
+      
         }
       }
     },
 
+   selectSceneAccordingToChevreWeapon(scene, weapon){
+      console.log(scene, weapon)
+      if( scene == "paradi" && weapon == "banane"){
+        return this.$store.commit('setActualVideo', this.computedStoryMap.videos['paradi_banane'])
+      }
+      if(scene == "paradi" && weapon == "couteau"){
+        console.log('couteauuUUuuuUUuuU')
+        return this.$store.commit('setActualVideo', this.computedStoryMap.videos['paradi_couteau'])
+      }
+      if(scene == "paradi" && weapon == "fusil"){
+        return this.$store.commit('setActualVideo', this.computedStoryMap.videos['paradi_fusil'])
+      }
+    
+    },
+
     compareForImposedRoot(actualVideoTimeCode, oneImposedRoot){
-        this.alreadySent = [];
+    
 
       if(oneImposedRoot.type == "imposed") {
-           if (actualVideoTimeCode >= oneImposedRoot.at && this.alreadySent.indexOf(oneImposedRoot.id) === -1) 
+        if (actualVideoTimeCode >= oneImposedRoot.at && this.imposedRootAlreadySent.indexOf(oneImposedRoot.id) === -1) 
            {
+           
+     
             // Route imposée = this.computedStoryMap.videos[oneImposedRoot.route] 
-            this.$store.commit("setActualVideo", this.computedStoryMap.videos[oneImposedRoot.route]);
-            console.log('ici on envoi la route imposed normalement', this.computedStoryMap.videos[oneImposedRoot.route])
+            // console.log('ici on envoi la route imposed normalement', this.computedVideo.videos[[oneImposedRoot].route])
+
+
               // Selon la route, on affect le store
               if(oneImposedRoot.route == "shooting" ){
 
                 this.$store.commit('setActualEnemy',      this.computedStoryMap.videos[oneImposedRoot.route].enemy );
                 this.$store.commit('setActualBackground', this.computedStoryMap.videos[oneImposedRoot.route].backgrounds );
-              }
-
-              if(oneImposedRoot.id == "cyberpunk_imposed") {
-                console.log('IMPOSED ROOT CYBERPUNK : ', oneImposedRoot.route )
                 this.$store.commit("setActualVideo", this.computedStoryMap.videos[oneImposedRoot.route]);
-                // this.$store.commit('setActualCallToActions', this.computedStoryMap.videos[oneImposedRoot.route].timedCtas);
-
-                this.$store.commit('setActualAudio', {} );
-
-                console.log(this.$store.state.actualVideo)
 
               }
+
+
+              if(oneImposedRoot.route == "paradi"){
+                  console.log('ON EST BIEDN DA NSLE REDIRECT VERS PARADI')
+                  this.choicesAlreadySent     =  []
+                  this.imposedRootAlreadySent =  []
+                  this.audiosAlreadySent      =  []
+                  this.$store.commit('setActualChoices', [])
+                  this.$store.commit('setActualAudio',{})
+                 
+                  return this.selectSceneAccordingToChevreWeapon('paradi', this.computedWeapon)
+              }
+
+              if(oneImposedRoot.id == "cyberpunk_imposed" ||
+                 oneImposedRoot.id == "valorant_b_to_cyberpunk_banane" ||
+                 oneImposedRoot.id == "valorant_c_to_cyberpunk_couteau" || 
+                 oneImposedRoot.id == "valorant_f_to_cyberpunk_fusil") {
+            
+                   this.choicesAlreadySent     =  []
+                   this.imposedRootAlreadySent =  []
+                   this.audiosAlreadySent      =  []
+                   this.$store.commit('setActualChoices',  [] )
+                   this.$store.commit('setActualAudio', {} );
+                   this.$store.commit('setActualCallToActions',{})
+                   
+                  if( this.computedWeapon == "banane"){
+                    this.ctasAlreadySent        =  []
+                    console.log('ok banane redirige bien vers' )
+                    this.$store.commit('setActualCallToActions', this.computedStoryMap.videos['cyberpunk_banane'].timedCtas)
+                    this.$store.commit('setActualVideo', this.computedStoryMap.videos['cyberpunk_banane'])
+                  }
+
+                  if(this.computedWeapon == "couteau"){
+                      console.log('couteauuUUuuuUUuuU')
+                      this.$store.commit('setActualVideo', this.computedStoryMap.videos['cyberpunk_couteau'])
+                  }
+                  if( this.computedWeapon == "fusil"){
+
+                     console.log('REDIRECTEEEEEED')
+                     this.$store.commit('setActualVideo', this.computedStoryMap.videos['cyberpunk_fusil'])
+                  }
+               
+          
+        
+
+              }
+
           } 
 
       }
 
     },
 
+
     compareForAudios(actualVideoTimeCode, oneAudio){
       if(oneAudio.type) {
-        if (actualVideoTimeCode >= oneAudio.at && this.alreadySent.indexOf(oneAudio.id) === -1) 
+        if (actualVideoTimeCode >= oneAudio.at && this.audiosAlreadySent.indexOf(oneAudio.id) === -1) 
         {
-          this.alreadySent.push(oneAudio.id);
+          this.audiosAlreadySent.push(oneAudio.id);
           this.$store.commit("setActualAudio", oneAudio);
         } 
+        if(actualVideoTimeCode >=  oneAudio.to &&  this.audiosAlreadySent.indexOf(oneAudio.id) !== -1 ){
+          console.log("stop AUDIO .to :", oneAudio.id);
+          this.$store.commit('setActualAudio', {});
+          this.audiosAlreadySent = [];
+          // this.ctasAlreadySent.splice(oneAudio,1)
+
+        }
 
       }
     },

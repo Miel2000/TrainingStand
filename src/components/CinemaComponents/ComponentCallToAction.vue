@@ -23,6 +23,8 @@ export default {
       isDisplay: "block",
     };
   },
+
+
   computed: {
     computedCtas() {
       return this.$store.getters.getCtas
@@ -106,6 +108,8 @@ export default {
 
   mounted() {
     console.log("dans le cta mounted :", this.computedCtas);
+    
+
   },
 };
 </script>
