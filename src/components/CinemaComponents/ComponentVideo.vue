@@ -223,6 +223,7 @@ export default {
 
    selectSceneAccordingToChevreWeapon(scene, weapon){
       console.log(scene, weapon)
+      // imposed paradi
       if( scene == "paradi" && weapon == "banane"){
         return this.$store.commit('setActualVideo', this.computedStoryMap.videos['paradi_banane'])
       }
@@ -232,6 +233,16 @@ export default {
       }
       if(scene == "paradi" && weapon == "fusil"){
         return this.$store.commit('setActualVideo', this.computedStoryMap.videos['paradi_fusil'])
+      }
+      // imposed diablo
+      if( scene == "diablo" && weapon == "banane"){
+        return this.$store.commit('setActualVideo', this.computedStoryMap.videos['diablo_banane'])
+      }
+      if( scene == "diablo" && weapon == "couteau"){
+        return this.$store.commit('setActualVideo', this.computedStoryMap.videos['diablo_couteau'])
+      }
+      if( scene == "diablo" && weapon == "fusil"){
+        return this.$store.commit('setActualVideo', this.computedStoryMap.videos['diablo_fusil'])
       }
     
     },
@@ -269,6 +280,12 @@ export default {
                   return this.selectSceneAccordingToChevreWeapon('paradi', this.computedWeapon)
               }
 
+              
+              if(oneImposedRoot.route == "diablo" ) {         
+                return this.selectSceneAccordingToChevreWeapon('diablo', this.computedWeapon)
+                 
+              }
+
               if(oneImposedRoot.id == "cyberpunk_imposed" ||
                  oneImposedRoot.id == "valorant_b_to_cyberpunk_banane" ||
                  oneImposedRoot.id == "valorant_c_to_cyberpunk_couteau" || 
@@ -297,6 +314,7 @@ export default {
                      console.log('REDIRECTEEEEEED')
                      this.$store.commit('setActualVideo', this.computedStoryMap.videos['cyberpunk_fusil'])
                   }
+
                
           
         

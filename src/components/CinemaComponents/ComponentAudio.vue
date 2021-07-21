@@ -6,6 +6,8 @@
        
 
             <audio
+                ref="audioScene"
+                id="audioScene"
                 autoplay
                 controls 
                 >
@@ -35,6 +37,10 @@ export default {
 
 
   mounted() {
+
+    // const audioScene = document.getElementById("audioScene");
+    // audioScene.volume = 0.3;
+  
 
     console.log('audio qui monte yep')
   },

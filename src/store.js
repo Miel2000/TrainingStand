@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import storyMap from "@/storyMap.js";
+import rdmData from "@/rdmData.js";
 
 Vue.use(Vuex)
 
@@ -13,13 +14,13 @@ export default new Vuex.Store({
     currentTimeVideo: 0,
     currentTimeAudio: 0,
 
-    actualVideo: storyMap.videos['weed'],
+    actualVideo: storyMap.videos['cyberpunk_fusil'],
     actualChoices: [],
     actualBackground: {},
     actualAudio: {},
     actualEnemy: {},
     actualCallToActions: [],
-    actualWeapon:"banane",
+    actualWeapon:"fusil",
 
     // stats
     myLife: 40,
@@ -36,7 +37,11 @@ export default new Vuex.Store({
 
     timerShootingRemake:0,
     routeHandler:[],
-    scoreGame: 0
+    scoreGame: 0,
+
+
+    // RDM
+    memeData:  rdmData
   },  
 
   getters : {
@@ -82,6 +87,13 @@ export default new Vuex.Store({
 
     getOutCapsule(state) {
       return state.sortirCapsule;
+    },
+
+
+    // Roue du meme 
+    
+    getMemeData(state) {
+      return state.memeData;
     }
     
   },
@@ -174,8 +186,14 @@ export default new Vuex.Store({
 
     setOutCapsule(state, x) {
        state.sortirCapsule = x;
-    }
+    },
 
+    // RDM
+
+    setMemeData(state,x) {
+      state.memeData = x;
+    }
+ 
 
     // setActualChoices: (state,x) => {
     //   state.actualChoices.push(x);

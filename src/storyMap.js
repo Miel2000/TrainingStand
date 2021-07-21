@@ -685,7 +685,7 @@ export default {
                     type: "choice"
                 },
                 {
-                    at: 68,
+                    at: 71.5,
                     to:76,
                     id: "paradi",
                     text: "Esquiver l'explosiun",
@@ -722,7 +722,7 @@ export default {
             timedImposedRoots: [
 
                 {
-                    at: 74,
+                    at: 78,
                     id:"paradi",
                     route: "paradi",
                     type:"imposed",
@@ -759,28 +759,19 @@ export default {
             self: {
                 url: "neopdf.mp4"
             },
-            timedChoices: [
+           
+            timedImposedRoots: [
                 {
-                    at: 35,
-                    id: "bouddhiste",
-                    text: "Devenir Bouddhiste",
-                    route: "bouddhiste",
-                    img: "bouddhiste.png",
-                    type: "choice"
-                },
-                {
-                    at: 36.5,
-                    id: "diablo",
-                    text: "Péter des gens",
-                    route: "diablo",
-                    img: "diablo.png",
-                    type: "choice"
-                },
-            ],
+                    at: 28,
+                    id:"diablo",
+                    route:"diablo",
+                    type:"imposed",
+                }
+            ]
           
            
         },
-        
+        // bouddhiste n'est pas implémenté (brouillon test)
         bouddhiste : {
             id:"bouddhiste",
             self: {
@@ -811,8 +802,6 @@ export default {
         
 
 
-
-
         paradi_banane:{
             id:'paradi_banane',
             self: {
@@ -829,6 +818,28 @@ export default {
             id:'paradi_fusil',
             self: {
                 url: "paradi/paradi_fusil.mp4"
+            },
+        },
+
+
+        diablo_banane:{
+            id:'diablo_banane',
+            self: {
+                url: "diablo/diablo_banane.mp4"
+            },
+        },
+        
+        diablo_couteau:{
+            id:'diablo_couteau',
+            self: {
+                url: "diablo/diablo_couteau.mp4"
+            },
+        },
+        
+        diablo_fusil:{
+            id:'diablo_fusil',
+            self: {
+                url: "diablo/diablo_fusil.mp4"
             },
         },
         
