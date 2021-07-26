@@ -33,6 +33,7 @@ import { pageOptions, pageEnter, pageLeave } from "@/PagesMethods.js";
 // import Tartanpion from "@/components/ComponentA.vue";
 // import layoutMethods from '@/LayoutMethods.js';
 
+
 export default {
   methods: {
     pageEnter,

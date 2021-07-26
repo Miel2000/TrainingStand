@@ -1,19 +1,27 @@
 <template>
   <div>
-    <div>
 
+    <div>
       <video
         :class=" { video_box : 'video_box' }"
         :src="'/assets/videos/' + computedVideo.self.url"
         controls 
         autoplay
         playsinline
-        @timeupdate="onTimeUpdate"
-      
-      >
-      </video>
-
+        @timeupdate="onVideoTimeUpdate"
+        />
     </div>
+
+    <div v-if="computedVideo.type =='generique'">
+        <audio
+            controls
+            autoplay
+            playsinline
+            :src="'/assets/mp3/generique/' + computedVideo.audioUrl" 
+            @timeupdate="onAudioTimeUpdate"
+        />
+    </div>
+
   </div>
 </template>
 
@@ -22,12 +30,12 @@ export default {
 
   data(){
     return {
-
       choicesAlreadySent: [],
       ctasAlreadySent: [],
       imposedRootAlreadySent: [],
       audiosAlreadySent: [],
-      
+      timedStoresAlreadySent:  [],
+      timedGeneriqueAudioAlreadySent: [],
     }
   },
 
@@ -39,6 +47,10 @@ export default {
 
     computedVideo(){
       return this.$store.getters.getVideo;
+    },
+
+    computedAudio(){
+      return this.$store.getters.getAudio;
     },
     computedWeapon(){
       return this.$store.getters.getWeapon;
@@ -54,6 +66,10 @@ export default {
 
     computedMyLife() {
       return this.$store.getters.getMyLife;
+    },
+
+    computedPointPapillon() {
+      return this.$store.getters.getPointPapillon;
     }
   },
 
@@ -63,10 +79,37 @@ export default {
     this.ctasAlreadySent        =  []
     this.imposedRootAlreadySent =  []
     this.audiosAlreadySent      =  []
+    this.timedStoresAlreadySent =  []
   },
 
   methods: {
-    onTimeUpdate(event) {
+
+    
+    onAudioTimeUpdate(event) {
+      console.log(event.target.currentTime);
+      this.$store.commit('setCurrentTimeAudio', event.target.currentTime);
+
+      if(this.computedVideo.mainTimedAudios){
+        this.computedVideo.mainTimedAudios.forEach((oneTimedGeneriqueAudio) => {
+            if(oneTimedGeneriqueAudio.at < event.target.currentTime  && this.timedGeneriqueAudioAlreadySent.indexOf(oneTimedGeneriqueAudio.id) === -1) {
+
+              this.timedGeneriqueAudioAlreadySent.push(oneTimedGeneriqueAudio.id)
+              this.$store.commit('setActualAudio', oneTimedGeneriqueAudio )
+              
+              console.log(oneTimedGeneriqueAudio.id, "<- timed audio id ")
+
+              if(oneTimedGeneriqueAudio.id == "papillon"  ) {
+                  this.$store.commit('setActualAudio', oneTimedGeneriqueAudio.id['pp1'] )
+
+              }
+            
+             
+            }
+        })
+      }
+    },
+
+    onVideoTimeUpdate(event) {
       this.$store.commit('setCurrentTimeVideo', event.target.currentTime);
 
       //   /!\ COMPARING FROM TIMELINE VIDEO /!\ 
@@ -95,6 +138,14 @@ export default {
      if(this.computedVideo.timedCtas ){
         this.computedVideo.timedCtas.forEach((timedCta) => {
           this.compareForTimedCtas(this.computedCurrentTimeVideo, timedCta)
+
+  
+        })
+      }  
+      // timedStore
+     if(this.computedVideo.timedStores ){
+        this.computedVideo.timedStores.forEach((timedStore) => {
+          this.compareForTimedStore(this.computedCurrentTimeVideo, timedStore)
 
   
         })
@@ -216,6 +267,26 @@ export default {
           
           // trash condition pour éviter chevauchement du timeCode valorant_arme et cyberpunk_arme (evite la redirection auto deathScene gatling )
             this.trappingCapsule(actualVideoTimeCode, oneTimedCtas.id)
+      
+        }
+      }
+    },
+    
+    compareForTimedStore(actualVideoTimeCode , oneTimedStore) {
+
+      if (oneTimedStore) {
+
+        if(actualVideoTimeCode >=  oneTimedStore.at && this.timedStoresAlreadySent.indexOf(oneTimedStore.id) === -1)
+        {
+          this.timedStoresAlreadySent.push(oneTimedStore.id);
+          this.$store.commit('setPdf', oneTimedStore.quantity);
+        }
+
+        if(actualVideoTimeCode >=  oneTimedStore.at &&  this.timedStoresAlreadySent.indexOf(oneTimedStore.id) !== -1 ){
+          
+          console.log(this.timedStoresAlreadySent, "donc nop")
+          // trash condition pour éviter chevauchement du timeCode valorant_arme et cyberpunk_arme (evite la redirection auto deathScene gatling )
+            // this.trappingCapsule(actualVideoTimeCode, oneTimedCtas.id)
       
         }
       }

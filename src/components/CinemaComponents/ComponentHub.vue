@@ -1,9 +1,9 @@
 <template>
 <div>
   
+      <!-- Healty Bar -->
     <div v-if="computedLife" class="life-container">
-       <p>le compoenent Hub</p>
-         
+      
       <h1 class="text-center eighties"  style="color:black"> {{ computedLife }} %</h1>
 
             <div class="healthbar">
@@ -20,11 +20,26 @@
             </div>
 
     </div>
-    <div class="weapon-container">
-      <img style="width:100px;"  v-if="computedWeapon === 'banane'"   src="/assets/images/banane.png"  alt="Banane yo" />
-      <img style="width:100px;"  v-if="computedWeapon === 'fusil'"    src="/assets/images/fusil.png"   alt="fusil wésh" />
-      <img style="width:100px;"  v-if="computedWeapon === 'couteau'"  src="/assets/images/couteau.png" alt="couteau uuuuu" />
+
+
+
+    <div class="inventory-container">
+    Inventaire :
+
+        <!-- Weapon -->
+      <div class="weapon-container">
+        <img style="width:100px;"  v-if="computedWeapon === 'banane'"   src="/assets/images/banane.png"  alt="Banane yo" />
+        <img style="width:100px;"  v-if="computedWeapon === 'fusil'"    src="/assets/images/fusil.png"   alt="fusil wésh" />
+        <img style="width:100px;"  v-if="computedWeapon === 'couteau'"  src="/assets/images/couteau.png" alt="couteau uuuuu" />
+      </div>
+
+       <!-- pdf -->
+      <div class="pdf-container">
+        <div v-if="computedPdf > 0"> <img src="/assets/images/pdf.png" style="width:100px;" alt=""> </div>
+      </div>
+
     </div>
+
 
 
 </div>
@@ -51,6 +66,9 @@ export default {
     
     computedWeapon() {
       return this.$store.getters.getWeapon;
+    },
+    computedPdf() {
+      return this.$store.getters.getPdf;
     },
   
   },

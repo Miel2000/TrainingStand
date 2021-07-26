@@ -767,6 +767,14 @@ export default {
                     route:"diablo",
                     type:"imposed",
                 }
+            ],
+
+            timedStores: [
+                {
+                    at:12,
+                    id:'pdf',
+                    quantity:1
+                }
             ]
           
            
@@ -807,6 +815,24 @@ export default {
             self: {
                 url: "paradi/paradi_banane.mp4"
             },
+            timedChoices: [
+                {
+                    at: 20,
+                    id: "generique_zelda",
+                    text: "Fin de l'aventure",
+                    route: "generique_zelda",
+                    img: "generique_zelda.png",
+                    type: "choice"
+                },
+                {
+                    at: 22,
+                    id: "diablo",
+                    text: "Péter des gens",
+                    route: "diablo",
+                    img: "diablo.png",
+                    type: "choice"
+                },
+            ],
         },
         paradi_couteau:{
             id:'paradi_couteau',
@@ -848,25 +874,40 @@ export default {
 
         generique_zelda : {
             id:"generique_zelda",
-            generique_audio_url : "generique/zelda_fairy_foutain.mp3",
-            audio: {
-                intro: { 
-                    url: "intro_zelda.mp3"
-                 },
-                points: {
-                    papillon: {
-                        pp0 : '0_pp.mp3', 
-                        pp1 : '1_pp.mp3', 
-     
-                    },
-                    nuage: {
-                        pn0 : '0_pn.mp3',
-                        pn1 : '1_pn.mp3',
-                    }
+            type:"generique",
+            self: {
+                url: "video_generique_zelda.mp4"
+            },
+            audioUrl : "sounds/zelda_fairy_foutain.mp3",
+            mainTimedAudios: [
+                {
+                    id: "intro",
+                    at: 5,
+                    url: "generique/intro.mp3"
+                },
+                {
+                    id:"pp1",
+                    at: 11,
+                    url:'generique/pp_1.mp3'
+                },
+           
+                {
+                    id: "suite_pp",
+                    at: 15,
+                    url: "generique/pp_suite.mp3"
+                },
+
+            ],
+            points: [
+           
+                {
+                    id:"nuage",
+                    at:20,
+                    pn0 : 'generique/0_pn.mp3',
+                    pn1 : 'generique/1_pn.mp3',
                 }
+                ]
             }
         }
-
-    }
 }
 

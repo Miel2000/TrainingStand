@@ -14,7 +14,7 @@ export default new Vuex.Store({
     currentTimeVideo: 0,
     currentTimeAudio: 0,
 
-    actualVideo: storyMap.videos['cyberpunk_fusil'],
+    actualVideo: storyMap.videos['generique_zelda'],
     actualChoices: [],
     actualBackground: {},
     actualAudio: {},
@@ -25,7 +25,7 @@ export default new Vuex.Store({
     // stats
     myLife: 40,
     ninjaLife: 200, 
-
+    pdf:0,
 
     // scene cyberpunk
     sortirCapsule:false,
@@ -37,7 +37,9 @@ export default new Vuex.Store({
 
     timerShootingRemake:0,
     routeHandler:[],
-    scoreGame: 0,
+
+    // Points
+    pointPapillon: 1,
 
 
     // RDM
@@ -48,6 +50,9 @@ export default new Vuex.Store({
 
     getCurrentTimeVideo(state) {
       return state.currentTimeVideo;
+    },
+    getCurrentTimeAudio(state) {
+      return state.currentTimeAudio;
     },
     getStoryMap(state) {
       return state.storyMap;
@@ -89,6 +94,13 @@ export default new Vuex.Store({
       return state.sortirCapsule;
     },
 
+    getPdf(state){
+      return state.pdf;
+    },
+    getPointPapillon(state){
+      return state.pointPapillon;
+    },
+
 
     // Roue du meme 
     
@@ -98,13 +110,14 @@ export default new Vuex.Store({
     
   },
 
-  mutations: {
-
-    // 
- 
+  mutations: { 
     
     setCurrentTimeVideo: (state, x) => {
       state.currentTimeVideo = x;
+    },
+
+    setCurrentTimeAudio: (state, x) => {
+      state.currentTimeAudio = x;
     },
 
     setActualVideo: (state,x) => {
@@ -186,6 +199,14 @@ export default new Vuex.Store({
 
     setOutCapsule(state, x) {
        state.sortirCapsule = x;
+    },
+
+    setPdf(state,x){
+      state.pdf += x;
+    },
+
+    setPointPapillon(state,x) {
+      state.pointPapillon += x
     },
 
     // RDM

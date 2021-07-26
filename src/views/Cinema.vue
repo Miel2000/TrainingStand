@@ -7,8 +7,9 @@
     </div>
   <div class="computed-scene">
 
-    <p> Computed Videos Infos : {{ Math.round(computedCurrentTimeVideo)  }} </p>
-    <p> Computed Videos Infos : {{ computedVideoInfos  }} </p>
+    <p> Computed CurrentTime Video : {{ Math.round(computedCurrentTimeVideo)  }} sc</p>
+    <p> Computed  CurrentTime Audio : {{ Math.round(computedCurrentTimeAudio)  }} sc</p>
+    <p> Computed  Video Infos : {{ computedVideoInfos  }} </p>
     <p> Computed Weapon : {{        computedWeapon  }} </p>
     <p> Computed Backgrounds : {{   computedBackgrounds  }} </p>
     <p> Computed Enemys : {{        computedEnemys  }} </p>
@@ -17,6 +18,8 @@
     <p> Computed Ctas : {{          computedCtas  }}  </p>
     <p> Computed Ninja Life : {{    computedNinjaLife  }} </p>
     <p> Computed Ma Life : {{       computedMyLife  }} </p>
+    <p> Computed PDF : {{           computedPdf  }} </p>
+    <p> Computed Point Papillon : {{computedPointPapillon  }} </p>
     
   </div>
 
@@ -59,13 +62,11 @@
                               <!-- CALL TO ACTIONS 
                                      Component  -->
     <div class="cta-scene">
-      
       <div v-if="computedCtas.id" >
 
             <ComponentCallToAction   />
 
       </div>
-
     </div>
 
                                         
@@ -95,30 +96,34 @@
 
 
 
+
+
   </div>
 </template>
 
 
 <script>
 
-import ComponentVideo from "@/components/CinemaComponents/ComponentVideo";
-import ComponentAudio from "@/components/CinemaComponents/ComponentAudio";
-import ComponentBackground from "@/components/CinemaComponents/ComponentBackground";
-import ComponentHub from "@/components/CinemaComponents/ComponentHub";
+import ComponentVideo        from "@/components/CinemaComponents/ComponentVideo";
+import ComponentAudio        from "@/components/CinemaComponents/ComponentAudio";
+import ComponentOneChoice    from "@/components/CinemaComponents/ComponentOneChoice";
+import ComponentBackground   from "@/components/CinemaComponents/ComponentBackground";
+import ComponentHub          from "@/components/CinemaComponents/ComponentHub";
 import ComponentCallToAction from "@/components/CinemaComponents/ComponentCallToAction";
-import ComponentEnemy from "@/components/CinemaComponents/ComponentEnemy";
-import ComponentOneChoice from "@/components/CinemaComponents/ComponentOneChoice";
+import ComponentEnemy        from "@/components/CinemaComponents/ComponentEnemy";
+
 
 
 export default {
   components: {
     ComponentVideo,
-    ComponentCallToAction,
-    ComponentOneChoice,
     ComponentAudio,
-    ComponentEnemy,
+    ComponentOneChoice,
     ComponentBackground,
-    ComponentHub
+    ComponentHub,
+    ComponentCallToAction,
+    ComponentEnemy
+   
   },
 
   computed: {
@@ -128,6 +133,10 @@ export default {
 
     computedCurrentTimeVideo(){
       return this.$store.getters.getCurrentTimeVideo;
+    },
+
+    computedCurrentTimeAudio(){
+      return this.$store.getters.getCurrentTimeAudio;
     },
 
     computedVideoInfos() {
@@ -168,6 +177,14 @@ export default {
 
     computedTimerShootingRemake() {
       return this.$store.getters.getTimerShootingRemake;
+    },
+
+    computedPdf() {
+      return this.$store.getters.getPdf;
+    },
+
+    computedPointPapillon() {
+      return this.$store.getters.getPointPapillon;
     }
   },
 

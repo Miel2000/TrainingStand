@@ -21,6 +21,8 @@
 </div>
 </template>
 <script>
+
+
 export default {
   name: "ComponentAudio",
 
@@ -37,7 +39,10 @@ export default {
 
 
   mounted() {
-
+    if(this.computedAudios.id == "pp1"){
+              this.$store.commit('setActualAudio', [])
+      
+    }
     // const audioScene = document.getElementById("audioScene");
     // audioScene.volume = 0.3;
   
