@@ -14,7 +14,7 @@ export default new Vuex.Store({
     currentTimeVideo: 0,
     currentTimeAudio: 0,
 
-    actualVideo: storyMap.videos['generique_zelda'],
+    actualVideo: storyMap.videos['shooting_remake'],
     actualChoices: [],
     actualBackground: {},
     actualAudio: {},
@@ -24,7 +24,7 @@ export default new Vuex.Store({
 
     // stats
     myLife: 40,
-    ninjaLife: 200, 
+    ninjaLife: 300, 
     pdf:0,
 
     // scene cyberpunk
@@ -39,7 +39,7 @@ export default new Vuex.Store({
     routeHandler:[],
 
     // Points
-    pointPapillon: 1,
+    pointPapillon: 2,
 
 
     // RDM

@@ -6,12 +6,13 @@
        
 
             <audio
-                ref="audioScene"
+               
                 id="audioScene"
                 autoplay
                 controls 
+                ref="audioScene" 
                 >
-                <source :src="'/assets/mp3/' + computedAudios.url"/>
+                <source   :src="'/assets/mp3/' + computedAudios.url"/>
             
             </audio>
 
@@ -27,22 +28,23 @@ export default {
   name: "ComponentAudio",
 
   components: {},
+
   
   computed: {
     computedAudios(){
       return this.$store.getters.getAudio;
+    },
+    computedPointPapillons(){
+      return this.$store.getters.getPointPapillon;
     }
   },
-  data() {
-    return {};
+
+  watch: {
   },
 
 
   mounted() {
-    if(this.computedAudios.id == "pp1"){
-              this.$store.commit('setActualAudio', [])
-      
-    }
+
     // const audioScene = document.getElementById("audioScene");
     // audioScene.volume = 0.3;
   

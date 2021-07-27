@@ -101,7 +101,7 @@ export default {
  
         if(choiceSelected.route == 'shooting_remake'){
         
-          this.$store.commit('setActualNinjaLife',  200);
+          this.$store.commit('setActualNinjaLife',  300);
           this.$store.commit('setActualAudio',      {});
           this.$store.commit('setActualEnemy',      this.computedStoryMap.videos[choiceSelected.route].enemy );
           this.$store.commit('setActualBackground', this.computedStoryMap.videos[choiceSelected.route].backgrounds );

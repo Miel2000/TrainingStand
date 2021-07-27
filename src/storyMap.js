@@ -506,6 +506,13 @@ export default {
                 type: "enemy"
                 
             },
+            {
+                id: "veran",
+                url: "veran.png",
+                vie: 100,
+                type: "enemy"
+                
+            },
   
         ],
 
@@ -839,12 +846,48 @@ export default {
             self: {
                 url: "paradi/paradi_couteau.mp4"
             },
+            timedChoices: [
+                {
+                    at: 20,
+                    id: "generique_zelda",
+                    text: "Fin de l'aventure",
+                    route: "generique_zelda",
+                    img: "generique_zelda.png",
+                    type: "choice"
+                },
+                {
+                    at: 22,
+                    id: "diablo",
+                    text: "Péter des gens",
+                    route: "diablo",
+                    img: "diablo.png",
+                    type: "choice"
+                },
+            ],
         },
         paradi_fusil:{
             id:'paradi_fusil',
             self: {
                 url: "paradi/paradi_fusil.mp4"
             },
+            timedChoices: [
+                {
+                    at: 20,
+                    id: "generique_zelda",
+                    text: "Fin de l'aventure",
+                    route: "generique_zelda",
+                    img: "generique_zelda.png",
+                    type: "choice"
+                },
+                {
+                    at: 22,
+                    id: "diablo",
+                    text: "Péter des gens",
+                    route: "diablo",
+                    img: "diablo.png",
+                    type: "choice"
+                },
+            ],
         },
 
 
@@ -886,14 +929,15 @@ export default {
                     url: "generique/intro.mp3"
                 },
                 {
-                    id:"pp1",
-                    at: 11,
-                    url:'generique/pp_1.mp3'
+                    id:"papillon",
+                    at: 10,
+                   
                 },
+             
            
                 {
                     id: "suite_pp",
-                    at: 15,
+                    at: 12,
                     url: "generique/pp_suite.mp3"
                 },
 

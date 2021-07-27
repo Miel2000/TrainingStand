@@ -42,7 +42,12 @@ export default {
 
   data() {
     return {
-    
+      nb_tire_fusil : 0,
+      nb_tire_banane : 0,
+      nb_tire_couteau : 0,
+
+      nb_death_banane : 0,
+      nb_death_couteau : 0
     };
   },
 
@@ -78,7 +83,23 @@ export default {
       // Quand un coup est émit via le click, selon $store.state.actualWeapon
       switch ( this.computedWeapon ) {
         case "banane": {
+          this.nb_tire_banane += 1;
+            
+          const aie_sounds = "./assets/rdm/mp3/dk_aie"+ this.nb_tire_banane +".mp3";
+          const beat_banane = new Audio(aie_sounds);
+          beat_banane.volume = 0.7;
+          beat_banane.play();
         
+          if(this.nb_tire_banane == 10) {
+            this.nb_tire_banane = 0;
+          }
+
+
+        if(enemy.vie < 15) {
+            const finisher_banane = new Audio("./assets/rdm/mp3/finisher.mp3");
+            finisher_banane.play();
+        } else { 
+
           const hits_bananes = [
             "./assets/mp3/hits/hit_banane1.mp3",
             "./assets/mp3/hits/hit_banane2.mp3",
@@ -93,11 +114,20 @@ export default {
           
           const hit_banane = new Audio(random_banane);
           hit_banane.play();
+        }
 
           this.$store.commit("minusNinjaLife", 10);
             enemy.vie -= 10;
       
           if (enemy.vie <= 0) {
+            this.nb_death_banane += 1;
+              
+            const b_death = "./assets/rdm/mp3/dk_death_demon"+ this.nb_death_banane +".mp3";
+            const death_banane = new Audio(b_death);
+          
+      
+            death_banane.play();
+     
             // enemy.vie = 0;
             console.log("DEAD", enemy.id);
           }
@@ -106,21 +136,50 @@ export default {
           break;
         }
         case "couteau": {
-          
+
+          if(this.nb_tire_couteau >= 2) {
+            this.nb_tire_couteau -= 1
+          } else {
+            this.nb_tire_couteau += 1
+
+          }
           const hits_couteau = [
             "./assets/mp3/hits/hit_couteau1.mp3",
             "./assets/mp3/hits/hit_couteau2.mp3",
+            
           ];
           const random_couteau = hits_couteau[Math.floor(Math.random() * hits_couteau.length)];
 
           const hit_couteau = new Audio(random_couteau);
           hit_couteau.play();
+          console.log(this.nb_tire_couteau)
 
-          this.$store.commit("minusNinjaLife", 50);
-          enemy.vie -= 50;
+        if(enemy.vie > 35) {
+          const hit_samourai_couteau = new Audio("./assets/rdm/mp3/dk_samourai_hit"+ this.nb_tire_couteau +".mp3");
+          hit_samourai_couteau.play();
+
+        }
+
+          this.$store.commit("minusNinjaLife", 35);
+          enemy.vie -= 35;
        
           if (enemy.vie <= 0) {
-            // enemy.vie = 0;
+            this.nb_death_couteau += 1;
+
+            if(this.nb_death_couteau == 3 ) {
+
+              const death_yeey = "./assets/rdm/mp3/dk_yeey.mp3";
+              const yeey = new Audio(death_yeey);
+              yeey.play();
+        
+            } else {
+
+              const death_samourai = "./assets/rdm/mp3/dk_samourai_death"+ this.nb_death_couteau +".mp3";
+              const death_s = new Audio(death_samourai);
+              death_s.volume = 1
+              death_s.play();
+
+            }
             console.log("DEAD", enemy.id);
 
           }
@@ -128,6 +187,13 @@ export default {
           break;
         }
         case "fusil": {
+          this.nb_tire_fusil += 1;
+        
+          const headshot = "./assets/mp3/hits/boom"+ this.nb_tire_fusil +".mp3";
+          const hit_headshot = new Audio(headshot);
+          hit_headshot.play();
+
+
           const hits_fusil = [
             "./assets/mp3/hits/hit_fusil1.mp3",
             "./assets/mp3/hits/hit_fusil2.mp3",
@@ -165,6 +231,8 @@ export default {
         this.$store.commit('setActualEnemy',          {})
         this.$store.commit('setActualBackground',     {})
         this.$store.commit('setActualVideo', this.computedStoryMap.videos['valorant_fusil'])
+       
+
       }
 
         // COUTEAU
@@ -177,6 +245,8 @@ export default {
         this.$store.commit('setActualEnemy',         {})
         this.$store.commit('setActualBackground',    {})
         this.$store.commit('setActualVideo', this.computedStoryMap.videos['valorant_couteau'])
+       
+
       }
 
         // BANANE
@@ -189,6 +259,7 @@ export default {
         this.$store.commit('setActualEnemy',         {})
         this.$store.commit('setActualBackground',    {})
         this.$store.commit('setActualVideo', this.computedStoryMap.videos['valorant_banane'])
+        
       }
 
     },

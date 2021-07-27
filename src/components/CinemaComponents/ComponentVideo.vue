@@ -74,13 +74,15 @@ export default {
   },
 
   mounted() {
-    
+   
     this.choicesAlreadySent     =  []
     this.ctasAlreadySent        =  []
     this.imposedRootAlreadySent =  []
     this.audiosAlreadySent      =  []
     this.timedStoresAlreadySent =  []
   },
+
+
 
   methods: {
 
@@ -93,13 +95,28 @@ export default {
         this.computedVideo.mainTimedAudios.forEach((oneTimedGeneriqueAudio) => {
             if(oneTimedGeneriqueAudio.at < event.target.currentTime  && this.timedGeneriqueAudioAlreadySent.indexOf(oneTimedGeneriqueAudio.id) === -1) {
 
-              this.timedGeneriqueAudioAlreadySent.push(oneTimedGeneriqueAudio.id)
               this.$store.commit('setActualAudio', oneTimedGeneriqueAudio )
               
               console.log(oneTimedGeneriqueAudio.id, "<- timed audio id ")
+              this.timedGeneriqueAudioAlreadySent.push(oneTimedGeneriqueAudio.id)
 
-              if(oneTimedGeneriqueAudio.id == "papillon"  ) {
-                  this.$store.commit('setActualAudio', oneTimedGeneriqueAudio.id['pp1'] )
+
+              if(oneTimedGeneriqueAudio.id == "papillon"  && this.computedPointPapillon == 1)  {
+                      console.log(' 1 POINT PAPILLON')
+
+                    let soundToPlay = '/assets/mp3/generique/pp_1.mp3'
+                    let audio = new Audio(soundToPlay)
+                    return audio.play();
+
+              }
+
+              if(oneTimedGeneriqueAudio.id == "papillon"  && this.computedPointPapillon == 2)  {
+                      console.log(' 1 POINT PAPILLON')
+
+                    let soundToPlay = '/assets/mp3/generique/pp_2.mp3'
+                    let audio = new Audio(soundToPlay)
+                    return audio.play();
+
 
               }
             
