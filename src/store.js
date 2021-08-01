@@ -1,224 +1,45 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import storyMap from "@/storyMap.js";
-import rdmData from "@/rdmData.js";
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
 
-    storyMap,
-
     currentTimeVideo: 0,
     currentTimeAudio: 0,
+    actualWeapon:"banane",
+    // STAND INFOS 
 
-    actualVideo: storyMap.videos['shooting_remake'],
-    actualChoices: [],
-    actualBackground: {},
-    actualAudio: {},
-    actualEnemy: {},
-    actualCallToActions: [],
-    actualWeapon:"fusil",
-
-    // stats
-    myLife: 40,
-    ninjaLife: 300, 
-    pdf:0,
-
-    // scene cyberpunk
-    sortirCapsule:false,
-    repondreNano: false, 
-
-
-    piegeFleche:false,
-    piegeChat:false,
-
-    timerShootingRemake:0,
-    routeHandler:[],
-
-    // Points
-    pointPapillon: 2,
-
-
-    // RDM
-    memeData:  rdmData
+    armes: [
+      {id: "fusil", img: "assets/stand/images/armes/fusil.png", dmg: 100 },
+      {id: "couteau", img: "assets/stand/images/armes/couteau.png", dmg: 50 },
+      {id: "banane", img: "assets/stand/images/armes/banane.png", dmg: 35 }
+    ],
+  
   },  
 
   getters : {
 
-    getCurrentTimeVideo(state) {
-      return state.currentTimeVideo;
-    },
-    getCurrentTimeAudio(state) {
-      return state.currentTimeAudio;
-    },
-    getStoryMap(state) {
-      return state.storyMap;
-    },
-    getVideo(state){
-      return state.actualVideo;
-    },
-    getChoices(state){
-      return state.actualChoices;
-    },
-    getAudio(state){
-      return state.actualAudio;
-    },
-    getCtas(state){
-      return state.actualCallToActions;
-    },
-    getTimerShootingRemake(state) {
-      return state.timerShootingRemake;
-    },
-    getEnemy(state){
-      return state.actualVideo.enemy;
-    },
-    getBackground(state){
-      return state.actualBackground;
-    },
+
     getWeapon(state) {
       return state.actualWeapon;
     },
 
-    getNinjaLife(state){
-      return state.ninjaLife;
-    },
-
-    getMyLife(state){
-      return state.myLife;
-    },
-
-    getOutCapsule(state) {
-      return state.sortirCapsule;
-    },
-
-    getPdf(state){
-      return state.pdf;
-    },
-    getPointPapillon(state){
-      return state.pointPapillon;
-    },
-
-
-    // Roue du meme 
-    
-    getMemeData(state) {
-      return state.memeData;
+    getAllWeapons(state){
+      return state.armes;
     }
+
+
     
   },
 
   mutations: { 
-    
-    setCurrentTimeVideo: (state, x) => {
-      state.currentTimeVideo = x;
-    },
-
-    setCurrentTimeAudio: (state, x) => {
-      state.currentTimeAudio = x;
-    },
-
-    setActualVideo: (state,x) => {
-      state.actualVideo = x;
-    },
-
-    setActualChoices: (state,x) => {
-      state.actualChoices = x;
-    },
-
-    addActualChoices: (state, x) => {
-      state.actualChoices.push(x);
-    },
-
-    setActualBackground: (state,x) => {
-      state.actualBackground = x;
-    },
-
-    setActualAudio:(state,x) => {
-      state.actualAudio = x;
-    },
-
-    setActualEnemy:(state,x) => {
-      state.actualEnemy = x;
-    },
-
-    setActualNinjaLife: (state, x) => {
-      state.ninjaLife = x;
-    },
-    
-    setActualCallToActions:(state,x) => {
-      state.actualCallToActions = x;
-    },
 
     setActualWeapon: (state, x) => {
       state.actualWeapon = x;
-    
     },
-
-    setTimerShootingRemake(state,x){
-      state.timerShootingRemake += x
-    },
-
-    setActualMyLife:(state,x) => {
-      state.myLife = x;
-    },
-
-    minusNinjaLife: (state, x) => {
-      state.ninjaLife -= x;
-    },
-
-
-
-
-    minusBossLife: (state, x) => {
-      state.bossLife -= x;
-    },
-
-    minusMyLife: (state, x) => {
-      state.myLife -= x;
-    },
-
-    
-    addMana: (state, x) => {
-      state.mana += x;
-    },
-
-    removeMana: (state, x) => {
-      state.mana -= x;
-    },
-
-    switchFleche: (state,x) => {
-      state.piegeFleche = x
-    },
-
-    switchChat: (state,x) => {
-      state.piegeChat = x
-    },
-
-    setOutCapsule(state, x) {
-       state.sortirCapsule = x;
-    },
-
-    setPdf(state,x){
-      state.pdf += x;
-    },
-
-    setPointPapillon(state,x) {
-      state.pointPapillon += x
-    },
-
-    // RDM
-
-    setMemeData(state,x) {
-      state.memeData = x;
-    }
- 
-
-    // setActualChoices: (state,x) => {
-    //   state.actualChoices.push(x);
-    // }
     
   }
 });

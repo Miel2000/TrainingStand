@@ -5,10 +5,9 @@
     <div id="nav">
 
       <router-link :to="{ name: 'home' }">Home</router-link>
-      <router-link :to="{ name: 'cinema' }">Scénar Interactif</router-link>
-      <router-link :to="{ name: 'boutique' }">Boutique</router-link>
-      <router-link :to="{ name: 'rdm' }">Roue du meme</router-link>
-      <router-link :to="{ name: 'game' }">GameCenter</router-link>
+
+      <router-link :to="{ name: 'standentraiment' }">Stand d'entrainement</router-link>
+
  
     </div>
 
@@ -17,8 +16,6 @@
       name="transitionRouter"
       mode="out-in"
     >
-      <!-- v-on:enter="pageEnter"
-      v-on:leave="pageLeave" -->
       <router-view />
 
     </transition>
@@ -29,22 +26,13 @@
 
 
 <script>
-import { pageOptions, pageEnter, pageLeave } from "@/PagesMethods.js";
-// import Tartanpion from "@/components/ComponentA.vue";
-// import layoutMethods from '@/LayoutMethods.js';
 
 
 export default {
-  methods: {
-    pageEnter,
-    pageLeave,
-  },
+
 
   data: function() {
-    return {
-      transitionDuration: pageOptions.routerTransitionDuration,
-      routeName: "",
-    };
+  
   },
 
   watch: {
